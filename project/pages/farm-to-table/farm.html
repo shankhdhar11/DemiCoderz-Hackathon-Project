@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm to Table | NourishNet</title>
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="farm.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="../../assets/images/Logo.png" alt="NourishNet Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../donation/donation.html">Donate Food</a></li>
+                    <li><a href="../community-kitchen/community.html">Community Kitchens</a></li>
+                    <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+                    <li><a href="farm.html">Farm to Table</a></li>
+                    <li><a href="../zero-waste/zero.html">Zero Waste</a></li>
+                    <li><a href="../learn-act/learn.html">Learn & Act</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="farm-container page-content">
+        <div class="page-header">
+            <h1>🧑‍🌾 Farm to Table</h1>
+            <p>Fresh produce directly from local farmers to your table</p>
+        </div>
+
+        <div class="filter-section">
+            <input type="text" id="searchInput" placeholder="🔍 Search for produce..." class="search-bar">
+            <select id="categoryFilter" class="filter-select">
+                <option value="">All Categories</option>
+                <option value="vegetables">Vegetables</option>
+                <option value="fruits">Fruits</option>
+                <option value="herbs">Herbs</option>
+                <option value="dairy">Dairy</option>
+                <option value="grains">Grains</option>
+            </select>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be dynamically loaded -->
+        </div>
+    </div>
+
+    <!-- Shared JS -->
+    <script src="../../assets/js/main.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="farm.js"></script>
+</body>
+</html>
+

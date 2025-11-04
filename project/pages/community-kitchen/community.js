@@ -93,14 +93,14 @@ const locations = [
 // Create custom icons
 const kitchenIcon = L.divIcon({
     className: 'custom-marker',
-    html: '<div style="background-color: #1976d2; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;">🍳</div>',
+    html: '<div style="background-color: #22C55E; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;">🍳</div>',
     iconSize: [30, 30],
     iconAnchor: [15, 15]
 });
 
 const driveIcon = L.divIcon({
     className: 'custom-marker',
-    html: '<div style="background-color: #f57c00; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;">🚚</div>',
+    html: '<div style="background-color: #f59e0b; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;">🚚</div>',
     iconSize: [30, 30],
     iconAnchor: [15, 15]
 });

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn & Act - Food Waste Reduction</title>
+    <style>
+        /* Basic Setup and Variables */
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #1B5E20;
+            --light-bg: #f9fcf9; /* Very light, almost white background for the page */
+            --card-bg: #ffffff;
+            --hover-bg: #f0f8f0; /* Light green hover for cards */
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 40px 20px;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Styling */
+        .header-content {
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .header-content h1 {
+            color: var(--dark-green);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header-content h1::after {
+            content: '';
+            display: block;
+            width: 80%; /* Shorter line under the title */
+            height: 3px;
+            background-color: var(--primary-green);
+            margin: 5px auto 0;
+        }
+
+        .header-content p {
+            color: var(--light-text);
+            font-size: 1.1em;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            width: 100%;
+            max-width: 1200px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 30px;
+        }
+
+        .tab-item {
+            padding: 10px 0;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .tab-item.active {
+            color: var(--dark-green);
+            font-weight: bold;
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; /* Position it on the bottom border line */
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-green);
+        }
+
+        /* Article Grid */
+        .article-grid {
+            display: flex;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            justify-content: center;
+        }
+        
+        /* Article Card Styling */
+        .article-card {
+            flex: 1;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.3s, transform 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .article-card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            background-color: var(--hover-bg); /* Light background for the icon area */
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            font-size: 2.5em; /* Emoji size */
+            color: var(--primary-green);
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .card-meta span:first-child {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--dark-green);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .card-subtitle {
+             font-size: 1.1em;
+             font-weight: normal;
+             color: var(--primary-green);
+             margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: var(--light-text);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1; /* Makes the description take available space before the button */
+        }
+
+        .read-more-button {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1em;
+            text-align: center;
+            transition: background-color 0.3s;
+            align-self: flex-start; /* Aligns button to the left */
+        }
+
+        .read-more-button:hover {
+            background-color: var(--dark-green);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .article-grid {
+                flex-wrap: wrap;
+            }
+
+            .article-card {
+                flex-basis: calc(50% - 15px); /* Two cards per row */
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .article-grid {
+                flex-direction: column; /* One card per row */
+            }
+            .tab-navigation {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-content">
+        <h1>Learn & Act</h1>
+        <p>Educational resources to help you reduce food waste and live sustainably</p>
+    </div>
+
+    <div class="tab-navigation">
+        <div class="tabs">
+            <span class="tab-item active">Articles</span>
+            <span class="tab-item">Tips</span>
+            <span class="tab-item">Quizzes</span>
+        </div>
+    </div>
+
+    <div class="article-grid">
+        <div class="article-card">
+            <div class="card-icon">
+                <span class="icon">♻️</span> </div>
+            <div class="card-meta">
+                <span>Food Waste</span>
+                <span>5 min read</span>
+            </div>
+            <h3 class="card-title">10 Simple Ways to Reduce Food Waste at Home</h3>
+            <p class="card-description">Discover easy strategies to minimize food waste in your kitchen and save money.</p>
+            <a href="#" class="read-more-button">Read More</a>
+        </div>
+
+        <div class="article-card">
+            <div class="card-icon">
+                <span class="icon">🍴</span> </div>
+            <div class="card-meta">
+                <span>Sustainable Cooking</span>
+                <span>7 min read</span>
+            </div>
+            <h3 class="card-title">Creative Recipes for Leftovers</h3>
+            <p class="card-description">Transform your leftovers into delicious new meals with these innovative recipes.</p>
+            <a href="#" class="read-more-button">Read More</a>
+        </div>
+
+        <div class="article-card">
+            <div class="card-icon">
+                <span class="icon">🌱</span> </div>
+            <div class="card-meta">
+                <span>Gardening</span>
+                <span>10 min read</span>
+            </div>
+            <h3 class="card-title">Starting a Kitchen Garden: A Beginner's Guide</h3>
+            <p class="card-description">Learn how to grow your own herbs and vegetables, even in small spaces.</p>
+            <a href="#" class="read-more-button">Read More</a>
+        </div>
+    </div>
+</body>
+</html>

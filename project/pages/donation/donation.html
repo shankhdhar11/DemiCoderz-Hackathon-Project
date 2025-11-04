@@ -3,113 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Donation Portal | Food Security Hub</title>
-    
-    <!-- Shared CSS -->
-    <link rel="stylesheet" href="../../assets/css/reset.css">
-    <link rel="stylesheet" href="../../assets/css/global.css">
-    
-    <!-- Page Specific CSS -->
-    <link rel="stylesheet" href="donation.css">
+    <title>Food Donation Portal</title>
+    <style>
+        /* Basic Reset and Variables */
+        :root {
+            --primary-green: #4CAF50; /* A nice, standard green */
+            --light-green: #e8f5e9;
+            --dark-green: #1B5E20;
+            --text-color: #333;
+            --border-color: #ccc;
+            --background-color: #f7f7f7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--dark-green);
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        /* Main Container (Two Columns) */
+        .container {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            flex: 1; /* Makes both cards take equal width */
+        }
+
+        /* --- Left Section (Form) --- */
+        .form-section h2 {
+            color: var(--dark-green);
+            margin-top: 0;
+            font-size: 1.5em;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            font-size: 1em;
+        }
+
+        .date-input-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .date-input-container input {
+            /* Adjust input width for the icon */
+            width: 100%; 
+            padding-right: 40px; /* Make space for the icon */
+        }
+
+        .calendar-icon {
+            position: absolute;
+            right: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: var(--primary-green);
+        }
+
+        /* --- Right Section (Donations) --- */
+        .donations-section {
+            position: relative;
+            background-color: #fcfcfc; /* Slight background difference for the panel */
+            height: 450px; /* Define a fixed height to show scrollable content */
+            overflow-y: auto; /* Enable vertical scrolling */
+            /* Custom scrollbar simulation for better visual match */
+        }
+        
+        /* The visual element in the image implies a fixed header and scrollable body */
+        .donations-section h3 {
+            color: #555;
+            margin-top: 0;
+            font-size: 1.4em;
+            padding-bottom: 10px;
+            /* No border-bottom to match the image style */
+        }
+
+        .donations-list {
+            /* List content area */
+        }
+
+        .donation-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .donation-item:last-child {
+            border-bottom: none;
+        }
+
+        .donation-item h4 {
+            color: var(--dark-green); /* Changed to dark-green for visual contrast */
+            font-size: 1.1em;
+            font-weight: normal;
+            margin: 0 0 5px 0;
+        }
+
+        .donation-item p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .donation-item .best-before {
+            font-size: 0.85em;
+            color: #888;
+        }
+
+        .distance {
+            position: absolute;
+            top: 15px;
+            right: 0;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        /* Floating icon element (visually simulated from the screenshot) */
+        .floating-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: var(--primary-green);
+            z-index: 10;
+            cursor: pointer;
+        }
+        
+        /* Basic Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .donations-section {
+                height: auto;
+                overflow-y: visible;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="header">
-        <div class="nav-container">
-            <a href="../../index.html" class="logo">
-                <img src="../../assets/images/Logo.png" alt="NourishNet Logo">
-            </a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="donation.html">Donate Food</a></li>
-                    <li><a href="../community-kitchen/community.html">Community Kitchens</a></li>
-                    <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
-                    <li><a href="../farm-to-table/farm.html">Farm to Table</a></li>
-                    <li><a href="../zero-waste/zero.html">Zero Waste</a></li>
-                    <li><a href="../learn-act/learn.html">Learn & Act</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+    <header>
+        <h1>Food Donation Portal</h1>
+        <p>List surplus food or find donations nearby</p>
+    </header>
 
     <div class="container">
-        <div class="page-header">
-            <h1>🍱 Food Donation Portal</h1>
-            <p>List surplus food and connect with NGOs nearby</p>
+        <div class="card form-section">
+            <h2>List Surplus Food</h2>
+            <form>
+                <div class="form-group">
+                    <label for="food-type">Food Type</label>
+                    <input type="text" id="food-type" placeholder="e.g., Fresh vegetables, cooked meals, baked goods">
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="text" id="quantity" placeholder="e.g., 5 kg, 10 servings">
+                </div>
+
+                <div class="form-group">
+                    <label for="best-before">Best Before Date</label>
+                    <div class="date-input-container">
+                        <input type="text" id="best-before" placeholder="mm/dd/yyyy">
+                        <span class="calendar-icon">📅</span> </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-location">Pickup Location</label>
+                    <input type="text" id="pickup-location" placeholder="Enter your address">
+                </div>
+
+                <div class="form-group">
+                    <label for="details">Additional Details</label>
+                    <textarea id="details" rows="3" placeholder="Any special instructions or details about the food"></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">List Food for Donation</button>
+            </form>
         </div>
 
-        <div class="main-content">
-            <div class="card">
-                <h2>➕ List Your Donation</h2>
-                <form id="donationForm">
-                    <div class="form-group">
-                        <label>Food Item/Description</label>
-                        <input type="text" id="foodItem" placeholder="e.g., Fresh vegetables, cooked meals, packaged goods" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Quantity</label>
-                        <input type="text" id="quantity" placeholder="e.g., 10 kg, 50 servings" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Food Type</label>
-                        <select id="foodType" required>
-                            <option value="">Select type</option>
-                            <option value="fresh">Fresh Produce</option>
-                            <option value="cooked">Cooked Meals</option>
-                            <option value="packaged">Packaged Goods</option>
-                            <option value="baked">Baked Items</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Expiry Date</label>
-                        <input type="date" id="expiryDate" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" id="location" placeholder="Enter your address or area" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Contact Information</label>
-                        <input type="text" id="contact" placeholder="Phone or email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Additional Notes</label>
-                        <textarea id="notes" placeholder="Any special instructions or details..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn">Submit Donation</button>
-                </form>
-            </div>
-
-            <div class="card">
-                <h2>📋 Available Donations</h2>
-                <div class="filter-bar">
-                    <input type="text" id="searchInput" placeholder="🔍 Search donations...">
-                    <select id="typeFilter">
-                        <option value="">All Types</option>
-                        <option value="fresh">Fresh Produce</option>
-                        <option value="cooked">Cooked Meals</option>
-                        <option value="packaged">Packaged Goods</option>
-                        <option value="baked">Baked Items</option>
-                    </select>
+        <div class="card donations-section">
+            <h3>Available Donations Nearby</h3>
+            <div class="donations-list">
+                <div class="donation-item">
+                    <h4>Fresh Vegetables</h4>
+                    <p>5 kg of assorted vegetables</p>
+                    <p class="best-before">Best before: Tomorrow</p>
+                    <span class="distance">0.8 km away</span>
                 </div>
-                <div id="donationsList"></div>
+                <div class="donation-item">
+                    <h4>Bakery Items</h4>
+                    <p>Assorted bread and pastries</p>
+                    <p class="best-before">Best before: Today</p>
+                    <span class="distance">1.2 km away</span>
+                </div>
+                <div class="donation-item">
+                    <h4>Canned Goods</h4>
+                    <p>Various canned vegetables and soups</p>
+                    <p class="best-before">Best before: 6 months</p>
+                    <span class="distance">2.1 km away</span>
+                </div>
+                <div class="donation-item">
+                    <h4>Cooked Meals</h4>
+                    <p>10 portions of lasagna</p>
+                    <p class="best-before">Best before: Tonight</p>
+                    <span class="distance">1.5 km away</span>
+                </div>
+                <div class="donation-item">
+                    <h4>Baked Goods</h4>
+                    <p>A dozen bagels and muffins</p>
+                    <p class="best-before">Best before: Tomorrow</p>
+                    <span class="distance">0.5 km away</span>
+                </div>
             </div>
+            <div class="floating-icon">🌱</div> 
         </div>
     </div>
-
-    <!-- Shared JS -->
-    <script src="../../assets/js/main.js"></script>
-    
-    <!-- Page Specific JS -->
-    <script src="donation.js"></script>
 </body>
 </html>
-
