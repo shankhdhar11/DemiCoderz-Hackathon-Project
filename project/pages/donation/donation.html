@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donation Portal | Food Security Hub</title>
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="donation.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="../../assets/images/Logo.png" alt="NourishNet Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="donation.html">Donate Food</a></li>
+                    <li><a href="../community-kitchen/community.html">Community Kitchens</a></li>
+                    <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+                    <li><a href="../farm-to-table/farm.html">Farm to Table</a></li>
+                    <li><a href="../zero-waste/zero.html">Zero Waste</a></li>
+                    <li><a href="../learn-act/learn.html">Learn & Act</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>🍱 Food Donation Portal</h1>
+            <p>List surplus food and connect with NGOs nearby</p>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>➕ List Your Donation</h2>
+                <form id="donationForm">
+                    <div class="form-group">
+                        <label>Food Item/Description</label>
+                        <input type="text" id="foodItem" placeholder="e.g., Fresh vegetables, cooked meals, packaged goods" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="text" id="quantity" placeholder="e.g., 10 kg, 50 servings" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Food Type</label>
+                        <select id="foodType" required>
+                            <option value="">Select type</option>
+                            <option value="fresh">Fresh Produce</option>
+                            <option value="cooked">Cooked Meals</option>
+                            <option value="packaged">Packaged Goods</option>
+                            <option value="baked">Baked Items</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="date" id="expiryDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="location" placeholder="Enter your address or area" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact Information</label>
+                        <input type="text" id="contact" placeholder="Phone or email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Notes</label>
+                        <textarea id="notes" placeholder="Any special instructions or details..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Submit Donation</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>📋 Available Donations</h2>
+                <div class="filter-bar">
+                    <input type="text" id="searchInput" placeholder="🔍 Search donations...">
+                    <select id="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="fresh">Fresh Produce</option>
+                        <option value="cooked">Cooked Meals</option>
+                        <option value="packaged">Packaged Goods</option>
+                        <option value="baked">Baked Items</option>
+                    </select>
+                </div>
+                <div id="donationsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shared JS -->
+    <script src="../../assets/js/main.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="donation.js"></script>
+</body>
+</html>
+

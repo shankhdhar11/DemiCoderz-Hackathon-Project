@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Waste Tracker | Food Security Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .item-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .item-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .item-card.expiring-soon {
+            border-color: #ff9800;
+            background: #fff3e0;
+        }
+
+        .item-card.expired {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .item-card.fresh {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .item-name {
+            font-size: 1.3rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .item-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-fresh {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-expiring {
+            background: #ff9800;
+            color: white;
+        }
+
+        .status-expired {
+            background: #f44336;
+            color: white;
+        }
+
+        .item-details {
+            color: #666;
+            margin: 0.5rem 0;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-consume {
+            background: #4caf50;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #f44336;
+            color: white;
+        }
+
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">🍽️ Food Security Hub</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="food_donation.html">Donate Food</a></li>
+                    <li><a href="community_kitchen.html">Community Kitchens</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="farm_to_table.html">Farm to Table</a></li>
+                    <li><a href="zero_waste.html">Zero Waste</a></li>
+                    <li><a href="learn.html">Learn & Act</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>⏰ Zero Waste Tracker</h1>
+            <p>Track your groceries and reduce food waste with smart expiry alerts</p>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>➕ Add New Item</h2>
+                <form id="itemForm">
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" id="itemName" placeholder="e.g., Milk, Bread, Tomatoes" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Purchase Date</label>
+                        <input type="date" id="purchaseDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="date" id="expiryDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="category" required>
+                            <option value="">Select category</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="produce">Produce</option>
+                            <option value="meat">Meat & Seafood</option>
+                            <option value="bakery">Bakery</option>
+                            <option value="pantry">Pantry Items</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn">Add Item</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>📋 Your Grocery Items</h2>
+                <div class="stats-summary">
+                    <div class="stat-box">
+                        <div class="stat-number" id="totalItems">0</div>
+                        <div class="stat-label">Total Items</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="expiringCount">0</div>
+                        <div class="stat-label">Expiring Soon</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="expiredCount">0</div>
+                        <div class="stat-label">Expired</div>
+                    </div>
+                </div>
+                <div class="item-list" id="itemList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let items = JSON.parse(localStorage.getItem('groceryItems')) || [
+            {
+                id: 1,
+                name: "Milk",
+                purchaseDate: "2024-12-01",
+                expiryDate: "2024-12-08",
+                category: "dairy",
+                status: "expiring"
+            },
+            {
+                id: 2,
+                name: "Bread",
+                purchaseDate: "2024-12-03",
+                expiryDate: "2024-12-10",
+                category: "bakery",
+                status: "fresh"
+            },
+            {
+                id: 3,
+                name: "Tomatoes",
+                purchaseDate: "2024-11-28",
+                expiryDate: "2024-12-05",
+                category: "produce",
+                status: "expired"
+            }
+        ];
+
+        function getItemStatus(expiryDate) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const expiry = new Date(expiryDate);
+            expiry.setHours(0, 0, 0, 0);
+            const diffTime = expiry - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays < 0) return 'expired';
+            if (diffDays <= 3) return 'expiring';
+            return 'fresh';
+        }
+
+        function updateItemStatuses() {
+            items.forEach(item => {
+                item.status = getItemStatus(item.expiryDate);
+            });
+        }
+
+        function renderItems() {
+            const container = document.getElementById('itemList');
+            updateItemStatuses();
+            saveItems();
+
+            if (items.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No items tracked yet. Add your first item to get started!</p>';
+                return;
+            }
+
+            // Sort items: expired first, then expiring, then fresh
+            const sortedItems = [...items].sort((a, b) => {
+                const statusOrder = { expired: 0, expiring: 1, fresh: 2 };
+                return statusOrder[a.status] - statusOrder[b.status];
+            });
+
+            container.innerHTML = sortedItems.map(item => {
+                const statusText = {
+                    expired: 'Expired',
+                    expiring: 'Expiring Soon',
+                    fresh: 'Fresh'
+                };
+                const statusClass = `status-${item.status}`;
+                const cardClass = item.status;
+
+                const expiryDate = new Date(item.expiryDate);
+                const today = new Date();
+                const diffTime = expiryDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                let daysText = '';
+                if (diffDays < 0) {
+                    daysText = `Expired ${Math.abs(diffDays)} day${Math.abs(diffDays) !== 1 ? 's' : ''} ago`;
+                } else if (diffDays === 0) {
+                    daysText = 'Expires today!';
+                } else {
+                    daysText = `${diffDays} day${diffDays !== 1 ? 's' : ''} remaining`;
+                }
+
+                return `
+                    <div class="item-card ${cardClass}">
+                        <div class="item-header">
+                            <div class="item-name">${item.name}</div>
+                            <span class="item-status ${statusClass}">${statusText[item.status]}</span>
+                        </div>
+                        <div class="item-details">
+                            <strong>Category:</strong> ${item.category.charAt(0).toUpperCase() + item.category.slice(1)}<br>
+                            <strong>Purchase Date:</strong> ${new Date(item.purchaseDate).toLocaleDateString()}<br>
+                            <strong>Expiry Date:</strong> ${expiryDate.toLocaleDateString()}<br>
+                            <strong>Status:</strong> ${daysText}
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-small btn-consume" onclick="consumeItem(${item.id})">✓ Consumed</button>
+                            <button class="btn-small btn-delete" onclick="deleteItem(${item.id})">🗑️ Remove</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            updateStats();
+        }
+
+        function updateStats() {
+            const total = items.length;
+            const expiring = items.filter(i => i.status === 'expiring').length;
+            const expired = items.filter(i => i.status === 'expired').length;
+
+            document.getElementById('totalItems').textContent = total;
+            document.getElementById('expiringCount').textContent = expiring;
+            document.getElementById('expiredCount').textContent = expired;
+        }
+
+        function saveItems() {
+            localStorage.setItem('groceryItems', JSON.stringify(items));
+        }
+
+        function consumeItem(id) {
+            items = items.filter(i => i.id !== id);
+            renderItems();
+        }
+
+        function deleteItem(id) {
+            if (confirm('Are you sure you want to remove this item?')) {
+                items = items.filter(i => i.id !== id);
+                renderItems();
+            }
+        }
+
+        document.getElementById('itemForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const newItem = {
+                id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1,
+                name: document.getElementById('itemName').value,
+                purchaseDate: document.getElementById('purchaseDate').value,
+                expiryDate: document.getElementById('expiryDate').value,
+                category: document.getElementById('category').value,
+                status: getItemStatus(document.getElementById('expiryDate').value)
+            };
+
+            items.push(newItem);
+            renderItems();
+            document.getElementById('itemForm').reset();
+        });
+
+        // Set default dates
+        document.getElementById('purchaseDate').valueAsDate = new Date();
+        const expiryDefault = new Date();
+        expiryDefault.setDate(expiryDefault.getDate() + 7);
+        document.getElementById('expiryDate').valueAsDate = expiryDefault;
+
+        renderItems();
+    </script>
+</body>
+</html>
