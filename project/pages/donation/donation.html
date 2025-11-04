@@ -295,7 +295,7 @@
     <div class="container">
         <div class="card form-section">
             <h2>List Surplus Food</h2>
-            <form>
+            <form id="donationForm">
                 <div class="form-group">
                     <label for="food-type">Food Type</label>
                     <input type="text" id="food-type" placeholder="e.g., Fresh vegetables, cooked meals, baked goods">
@@ -309,8 +309,9 @@
                 <div class="form-group">
                     <label for="best-before">Best Before Date</label>
                     <div class="date-input-container">
-                        <input type="text" id="best-before" placeholder="mm/dd/yyyy">
-                        <span class="calendar-icon">📅</span> </div>
+                        <input type="date" id="best-before" required>
+                        <span class="calendar-icon">📅</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -329,40 +330,17 @@
 
         <div class="card donations-section">
             <h3>Available Donations Nearby</h3>
-            <div class="donations-list">
-                <div class="donation-item">
-                    <h4>Fresh Vegetables</h4>
-                    <p>5 kg of assorted vegetables</p>
-                    <p class="best-before">Best before: Tomorrow</p>
-                    <span class="distance">0.8 km away</span>
-                </div>
-                <div class="donation-item">
-                    <h4>Bakery Items</h4>
-                    <p>Assorted bread and pastries</p>
-                    <p class="best-before">Best before: Today</p>
-                    <span class="distance">1.2 km away</span>
-                </div>
-                <div class="donation-item">
-                    <h4>Canned Goods</h4>
-                    <p>Various canned vegetables and soups</p>
-                    <p class="best-before">Best before: 6 months</p>
-                    <span class="distance">2.1 km away</span>
-                </div>
-                <div class="donation-item">
-                    <h4>Cooked Meals</h4>
-                    <p>10 portions of lasagna</p>
-                    <p class="best-before">Best before: Tonight</p>
-                    <span class="distance">1.5 km away</span>
-                </div>
-                <div class="donation-item">
-                    <h4>Baked Goods</h4>
-                    <p>A dozen bagels and muffins</p>
-                    <p class="best-before">Best before: Tomorrow</p>
-                    <span class="distance">0.5 km away</span>
-                </div>
+            <div class="donations-list" id="donationsList">
+                <!-- Donations will be loaded dynamically -->
             </div>
             <div class="floating-icon">🌱</div> 
         </div>
     </div>
+
+    <!-- Shared JS -->
+    <script src="../../assets/js/main.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="donation.js"></script>
 </body>
 </html>

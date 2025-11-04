@@ -83,40 +83,102 @@ const products = [
     }
 ];
 
-function renderProducts() {
-    const container = document.getElementById('productsGrid');
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const categoryFilter = document.getElementById('categoryFilter').value;
-
-    let filtered = products.filter(product => {
-        const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
-                            product.farm.toLowerCase().includes(searchTerm);
-        const matchesCategory = !categoryFilter || product.category === categoryFilter;
-        return matchesSearch && matchesCategory;
-    });
-
-    if (filtered.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">No products found matching your criteria.</p>';
-        return;
+// Farm products data matching the HTML structure
+const farmProducts = [
+    {
+        name: "Organic Tomatoes",
+        farmer: "Ramesh Kumar",
+        price: "₹80/kg",
+        description: "Sun-ripened and pesticide-free tomatoes freshly picked today.",
+        image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=800&q=60",
+        category: "vegetables"
+    },
+    {
+        name: "Alphonso Mangoes",
+        farmer: "Rani Devi",
+        price: "₹220/kg",
+        description: "Premium Ratnagiri Alphonso mangoes, sweet and juicy.",
+        image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800&q=60",
+        category: "fruits"
+    },
+    {
+        name: "Fresh Spinach (Palak)",
+        farmer: "Suresh Yadav",
+        price: "₹40/kg",
+        description: "Morning harvest, naturally grown and washed.",
+        image: "https://images.unsplash.com/photo-1524594154909-5f2c1b0d9f12?auto=format&fit=crop&w=800&q=60",
+        category: "vegetables"
+    },
+    {
+        name: "A2 Cow Milk",
+        farmer: "Anita Singh",
+        price: "₹120/2L",
+        description: "Freshly pasteurised A2 milk from grass-fed cows.",
+        image: "https://images.unsplash.com/photo-1555992336-03a23c2ba1b6?auto=format&fit=crop&w=800&q=60",
+        category: "dairy"
+    },
+    {
+        name: "Crunchy Carrots",
+        farmer: "Meena Bai",
+        price: "₹60/kg",
+        description: "Sweet, crisp carrots grown with organic compost.",
+        image: "https://images.unsplash.com/photo-1506801310323-534be5e7bb57?auto=format&fit=crop&w=800&q=60",
+        category: "vegetables"
+    },
+    {
+        name: "Holy Basil (Tulsi)",
+        farmer: "Ramesh Kumar",
+        price: "₹30/bundle",
+        description: "Aromatic and medicinal Tulsi leaves for teas & cooking.",
+        image: "https://images.unsplash.com/photo-1506801310323-534be5e7bb57?auto=format&fit=crop&w=800&q=60",
+        category: "herbs"
+    },
+    {
+        name: "Golden Potatoes",
+        farmer: "Vijay Patel",
+        price: "₹35/kg",
+        description: "Hand-picked golden potatoes, perfect for curries and fries.",
+        image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=60",
+        category: "vegetables"
+    },
+    {
+        name: "Strawberries",
+        farmer: "Neha Joshi",
+        price: "₹180/box",
+        description: "Sweet mountain strawberries from Mahabaleshwar farms.",
+        image: "https://images.unsplash.com/photo-1615475097225-3a4d5e1c0504?auto=format&fit=crop&w=800&q=60",
+        category: "fruits"
+    },
+    {
+        name: "Organic Honey",
+        farmer: "Ravi Sharma",
+        price: "₹350/500g",
+        description: "Pure wild forest honey collected naturally, unprocessed.",
+        image: "https://images.unsplash.com/photo-1606813903267-4d3d75d5c357?auto=format&fit=crop&w=800&q=60",
+        category: "other"
+    },
+    {
+        name: "Free-Range Eggs",
+        farmer: "Kiran Devi",
+        price: "₹110/dozen",
+        description: "Farm-fresh eggs from healthy, outdoor-raised hens.",
+        image: "https://images.unsplash.com/photo-1590080875832-123a64f09f04?auto=format&fit=crop&w=800&q=60",
+        category: "dairy"
     }
+];
 
-    container.innerHTML = filtered.map(product => `
-        <div class="product-card">
-            <div class="product-icon">${product.icon}</div>
-            <div class="product-name">${product.name}</div>
-            <div class="product-farm">📍 ${product.farm}</div>
-            <div class="product-price">${product.price}</div>
-            <div class="product-description">${product.description}</div>
-            <span class="product-availability ${product.availability}">
-                ${product.availability === 'available' ? '✓ In Stock' : '⚠ Limited Stock'}
-            </span>
-        </div>
-    `).join('');
+function renderProducts() {
+    const container = document.querySelector('.grid');
+    if (!container) return;
+
+    // Products are already in HTML, so we just need to make them searchable/filterable
+    // The HTML structure is static, so we'll keep it as is but add search functionality
+    // if needed in the future
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('searchInput').addEventListener('input', renderProducts);
-    document.getElementById('categoryFilter').addEventListener('change', renderProducts);
+    // Farm page products are static in HTML, no dynamic rendering needed
+    // But we can add search/filter if needed
     renderProducts();
 });
 

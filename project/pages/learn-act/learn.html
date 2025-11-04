@@ -241,7 +241,113 @@
             background-color: var(--dark-green);
         }
 
+        /* Modal Styles */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .article-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--dark-green);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: var(--dark-green);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-meta {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body {
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body ul, .modal-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body h4 {
+            color: var(--dark-green);
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
         /* Responsive Design */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 2rem 1.5rem;
+                margin: 10px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+        }
         @media (max-width: 900px) {
             .article-grid {
                 flex-wrap: wrap;
@@ -304,7 +410,7 @@
             </div>
             <h3 class="card-title">10 Simple Ways to Reduce Food Waste at Home</h3>
             <p class="card-description">Discover easy strategies to minimize food waste in your kitchen and save money.</p>
-            <a href="#" class="read-more-button">Read More</a>
+            <button class="read-more-button" onclick="openArticleModal('10-simple-ways')">Read More</button>
         </div>
 
         <div class="article-card">
@@ -316,7 +422,7 @@
             </div>
             <h3 class="card-title">Creative Recipes for Leftovers</h3>
             <p class="card-description">Transform your leftovers into delicious new meals with these innovative recipes.</p>
-            <a href="#" class="read-more-button">Read More</a>
+            <button class="read-more-button" onclick="openArticleModal('creative-recipes')">Read More</button>
         </div>
 
         <div class="article-card">
@@ -328,8 +434,26 @@
             </div>
             <h3 class="card-title">Starting a Kitchen Garden: A Beginner's Guide</h3>
             <p class="card-description">Learn how to grow your own herbs and vegetables, even in small spaces.</p>
-            <a href="#" class="read-more-button">Read More</a>
+            <button class="read-more-button" onclick="openArticleModal('kitchen-garden')">Read More</button>
         </div>
     </div>
+
+    <!-- Article Modal -->
+    <div id="articleModal" class="article-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeArticleModal()">&times;</button>
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <div class="modal-meta" id="modalMeta"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Shared JS -->
+    <script src="../../assets/js/main.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="learn.js"></script>
 </body>
 </html>

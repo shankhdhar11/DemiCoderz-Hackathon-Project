@@ -36,69 +36,151 @@ let donations = JSON.parse(localStorage.getItem('donations')) || [
     }
 ];
 
+function formatDate(dateString) {
+    if (!dateString) return 'N/A';
+    try {
+        const date = new Date(dateString);
+        const today = new Date();
+        const diffTime = date - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays < 0) return 'Expired';
+        if (diffDays === 0) return 'Today';
+        if (diffDays === 1) return 'Tomorrow';
+        if (diffDays <= 7) return `In ${diffDays} days`;
+        return date.toLocaleDateString();
+    } catch {
+        return dateString;
+    }
+}
+
+function calculateDistance() {
+    // Simulate distance calculation
+    return (Math.random() * 3 + 0.5).toFixed(1);
+}
+
 function renderDonations() {
     const container = document.getElementById('donationsList');
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const typeFilter = document.getElementById('typeFilter').value;
+    if (!container) return;
 
-    let filtered = donations.filter(d => {
-        const matchesSearch = d.item.toLowerCase().includes(searchTerm) || 
-                            d.location.toLowerCase().includes(searchTerm);
-        const matchesType = !typeFilter || d.type === typeFilter;
-        return matchesSearch && matchesType;
-    });
+    // Add default donations if list is empty
+    if (donations.length === 0) {
+        donations = [
+            {
+                id: 1,
+                item: "Fresh Vegetables",
+                quantity: "5 kg",
+                type: "fresh",
+                expiry: new Date(Date.now() + 86400000).toISOString().split('T')[0], // Tomorrow
+                location: "Downtown",
+                contact: "555-0001",
+                notes: "Assorted vegetables",
+                status: "available"
+            },
+            {
+                id: 2,
+                item: "Bakery Items",
+                quantity: "Assorted bread and pastries",
+                type: "baked",
+                expiry: new Date().toISOString().split('T')[0], // Today
+                location: "Market Street",
+                contact: "555-0002",
+                notes: "Fresh from bakery",
+                status: "available"
+            },
+            {
+                id: 3,
+                item: "Canned Goods",
+                quantity: "Various canned vegetables and soups",
+                type: "packaged",
+                expiry: new Date(Date.now() + 180 * 86400000).toISOString().split('T')[0], // 6 months
+                location: "North Side",
+                contact: "555-0003",
+                notes: "Long shelf life",
+                status: "available"
+            },
+            {
+                id: 4,
+                item: "Cooked Meals",
+                quantity: "10 portions of lasagna",
+                type: "cooked",
+                expiry: new Date().toISOString().split('T')[0], // Today
+                location: "Community Center",
+                contact: "555-0004",
+                notes: "Prepared today",
+                status: "available"
+            },
+            {
+                id: 5,
+                item: "Baked Goods",
+                quantity: "A dozen bagels and muffins",
+                type: "baked",
+                expiry: new Date(Date.now() + 86400000).toISOString().split('T')[0], // Tomorrow
+                location: "Bakery Lane",
+                contact: "555-0005",
+                notes: "Fresh baked",
+                status: "available"
+            }
+        ];
+        localStorage.setItem('donations', JSON.stringify(donations));
+    }
 
-    if (filtered.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No donations found matching your criteria.</p>';
+    if (donations.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No donations available yet.</p>';
         return;
     }
 
-    container.innerHTML = filtered.map(donation => `
-        <div class="donation-item">
-            <div class="donation-header">
-                <div class="donation-title">${donation.item}</div>
-                <span class="donation-badge badge-${donation.status}">
-                    ${donation.status === 'available' ? '✓ Available' : '⏳ Claimed'}
-                </span>
+    container.innerHTML = donations.map(donation => {
+        const distance = calculateDistance();
+        const expiryText = formatDate(donation.expiry);
+        
+        return `
+            <div class="donation-item">
+                <h4>${donation.item}</h4>
+                <p>${donation.quantity}</p>
+                <p class="best-before">Best before: ${expiryText}</p>
+                <span class="distance">${distance} km away</span>
             </div>
-            <div class="donation-details">
-                <strong>Quantity:</strong> ${donation.quantity}<br>
-                <strong>Type:</strong> ${donation.type.charAt(0).toUpperCase() + donation.type.slice(1)}<br>
-                <strong>Expiry:</strong> ${new Date(donation.expiry).toLocaleDateString()}<br>
-                ${donation.notes ? `<strong>Notes:</strong> ${donation.notes}<br>` : ''}
-            </div>
-            <div class="donation-location">
-                📍 ${donation.location} | 📞 ${donation.contact}
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('donationForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const newDonation = {
-            id: donations.length + 1,
-            item: document.getElementById('food-type').value,
-            quantity: document.getElementById('quantity').value,
-            type: 'other', // Default type since form doesn't have type selector
-            expiry: document.getElementById('best-before').value,
-            location: document.getElementById('pickup-location').value,
-            contact: 'N/A',
-            notes: document.getElementById('details').value,
-            status: 'available'
-        };
+    const form = document.getElementById('donationForm');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const foodType = document.getElementById('food-type').value;
+            const quantity = document.getElementById('quantity').value;
+            const expiry = document.getElementById('best-before').value;
+            const location = document.getElementById('pickup-location').value;
+            const details = document.getElementById('details').value;
+            
+            if (!foodType || !quantity || !expiry || !location) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            const newDonation = {
+                id: donations.length > 0 ? Math.max(...donations.map(d => d.id)) + 1 : 1,
+                item: foodType,
+                quantity: quantity,
+                type: 'other',
+                expiry: expiry,
+                location: location,
+                contact: 'Contact donor',
+                notes: details || '',
+                status: 'available'
+            };
 
-        donations.unshift(newDonation);
-        localStorage.setItem('donations', JSON.stringify(donations));
-        renderDonations();
-        document.getElementById('donationForm').reset();
-        alert('Thank you! Your donation has been listed successfully.');
-    });
-
-    // Note: Search and filter functionality would need to be added if needed
-    // For now, just render initial donations
+            donations.unshift(newDonation);
+            localStorage.setItem('donations', JSON.stringify(donations));
+            renderDonations();
+            form.reset();
+            alert('Thank you! Your donation has been listed successfully.');
+        });
+    }
 
     renderDonations();
 });
