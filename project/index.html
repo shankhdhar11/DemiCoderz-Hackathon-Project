@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NourishNet - Ending Hunger Together</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .features-section {
+            padding: 4rem 2rem;
+            background: var(--background-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.15);
+            border: 2px solid var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        .stats-section {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin-top: 3rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="home-page">
+    <div class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/Logo.png" alt="NourishNet Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pages/donation/donation.html">Donate Food</a></li>
+                    <li><a href="pages/community-kitchen/community.html">Community Kitchens</a></li>
+                    <li><a href="pages/dashboard/dashboard.html">Dashboard</a></li>
+                    <li><a href="pages/farm-to-table/farm.html">Farm to Table</a></li>
+                    <li><a href="pages/zero-waste/zero.html">Zero Waste</a></li>
+                    <li><a href="pages/learn-act/learn.html">Learn & Act</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="hero-section home-page-content">
+        <div class="hero-content">
+            <h1>Ending Hunger, Together.</h1>
+            <p>Connect to surplus food, find local aid, and track your impact. Join NourishNet in making a difference.</p>
+            <div class="hero-cta">
+                <a href="pages/community-kitchen/community.html" class="btn">Find Food Near Me</a>
+                <a href="pages/donation/donation.html" class="btn-secondary">Donate Surplus Food</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-section home-page-content">
+        <div class="container">
+            <div class="features-grid">
+                <a href="pages/donation/donation.html" class="feature-card">
+                    <span class="feature-icon">🍱</span>
+                    <h2>Food Donation Portal</h2>
+                    <p>List surplus food and connect with NGOs. Help reduce food waste while feeding those in need. Your donation can make a difference.</p>
+                </a>
+
+                <a href="pages/community-kitchen/community.html" class="feature-card">
+                    <span class="feature-icon">🗺️</span>
+                    <h2>Community Kitchen & Event Locator</h2>
+                    <p>Find nearby food drives and community kitchens on an interactive map. Discover locations where you can get help or volunteer.</p>
+                </a>
+
+                <a href="pages/dashboard/dashboard.html" class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h2>Hunger Awareness Dashboard</h2>
+                    <p>Explore interactive charts showing hunger statistics, donations made, and food waste data. Stay informed about the crisis.</p>
+                </a>
+
+                <a href="pages/farm-to-table/farm.html" class="feature-card">
+                    <span class="feature-icon">🧑‍🌾</span>
+                    <h2>Farm-to-Table Section</h2>
+                    <p>Farmers showcase fresh produce directly to customers. Support local agriculture and get the freshest ingredients.</p>
+                </a>
+
+                <a href="pages/zero-waste/zero.html" class="feature-card">
+                    <span class="feature-icon">⏰</span>
+                    <h2>Zero Waste Tracker</h2>
+                    <p>Track your groceries' expiry dates and get color-coded alerts. Reduce food waste in your household.</p>
+                </a>
+
+                <a href="pages/learn-act/learn.html" class="feature-card">
+                    <span class="feature-icon">📚</span>
+                    <h2>Learn & Act Page</h2>
+                    <p>Tips, quizzes, and articles about food sustainability and waste reduction. Educate yourself and take action.</p>
+                </a>
+            </div>
+
+            <div class="stats-section">
+                <h2>Impact Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">1,250+</div>
+                        <div class="stat-label">Meals Served Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">450+</div>
+                        <div class="stat-label">Active Donors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">85+</div>
+                        <div class="stat-label">Community Kitchens</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2,300+</div>
+                        <div class="stat-label">Lbs Food Saved</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+

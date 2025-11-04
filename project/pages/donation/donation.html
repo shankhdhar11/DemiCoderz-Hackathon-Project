@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Donation Portal</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
     <style>
         /* Basic Reset and Variables */
         :root {
@@ -20,10 +21,62 @@
             background-color: var(--background-color);
             margin: 0;
             padding: 20px;
+            padding-top: 0;
             color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-header {
+            background: var(--bg-header);
+            padding: 1.2rem 2rem;
+            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
         }
 
         /* Header Styling */
@@ -148,10 +201,6 @@
             /* No border-bottom to match the image style */
         }
 
-        .donations-list {
-            /* List content area */
-        }
-
         .donation-item {
             border-bottom: 1px solid #eee;
             padding: 15px 0;
@@ -220,6 +269,24 @@
     </style>
 </head>
 <body>
+    <div class="nav-header">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">
+                <img src="../../assets/images/Logo.png" alt="NourishNet Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="donation.html">Donate Food</a></li>
+                    <li><a href="../community-kitchen/community.html">Community Kitchens</a></li>
+                    <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+                    <li><a href="../farm-to-table/farm.html">Farm to Table</a></li>
+                    <li><a href="../zero-waste/zero.html">Zero Waste</a></li>
+                    <li><a href="../learn-act/learn.html">Learn & Act</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
     <header>
         <h1>Food Donation Portal</h1>
         <p>List surplus food or find donations nearby</p>
