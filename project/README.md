@@ -1,4 +1,4 @@
-# Food Security Hub - Hackathon Project
+# NourishNet - Hackathon Project
 
 A comprehensive web platform designed to address food security and hunger through multiple interconnected features.
 

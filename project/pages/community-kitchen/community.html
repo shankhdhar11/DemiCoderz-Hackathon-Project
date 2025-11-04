@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Kitchen & Event Locator | Food Security Hub</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="community.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="../../assets/images/Logo.png" alt="NourishNet Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../donation/donation.html">Donate Food</a></li>
+                    <li><a href="community.html">Community Kitchens</a></li>
+                    <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+                    <li><a href="../farm-to-table/farm.html">Farm to Table</a></li>
+                    <li><a href="../zero-waste/zero.html">Zero Waste</a></li>
+                    <li><a href="../learn-act/learn.html">Learn & Act</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>🗺️ Community Kitchen & Event Locator</h1>
+            <p>Find nearby food drives and community kitchens in your area</p>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h2>📍 Filters</h2>
+                
+                <div class="filter-section">
+                    <h3>Location Type</h3>
+                    <button class="filter-btn active" data-filter="all">
+                        <span class="icon">🌐</span>
+                        <span>All Locations</span>
+                    </button>
+                    <button class="filter-btn" data-filter="kitchen">
+                        <span class="icon">🍳</span>
+                        <span>Community Kitchens</span>
+                    </button>
+                    <button class="filter-btn" data-filter="drive">
+                        <span class="icon">🚚</span>
+                        <span>Food Drives</span>
+                    </button>
+                </div>
+
+                <div class="stats">
+                    <h3>📊 Statistics</h3>
+                    <div class="stat-item">
+                        <span>Total Locations</span>
+                        <span class="stat-number" id="totalLocations">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Kitchens</span>
+                        <span class="stat-number" id="kitchenCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Food Drives</span>
+                        <span class="stat-number" id="driveCount">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color kitchen"></div>
+                        <span>Community Kitchen</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color drive"></div>
+                        <span>Food Drive</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="location-list">
+            <h2>📍 Nearby Locations</h2>
+            <input type="text" class="search-bar" id="searchBar" placeholder="🔍 Search by name or address...">
+            <div id="locationCards"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Shared JS -->
+    <script src="../../assets/js/main.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="community.js"></script>
+</body>
+</html>
+
