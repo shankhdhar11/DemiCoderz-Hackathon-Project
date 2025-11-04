@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunger Awareness Dashboard | NourishNet</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="../../assets/images/Logo.png" alt="NourishNet Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../donation/donation.html">Donate Food</a></li>
+                    <li><a href="../community-kitchen/community.html">Community Kitchens</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="../farm-to-table/farm.html">Farm to Table</a></li>
+                    <li><a href="../zero-waste/zero.html">Zero Waste</a></li>
+                    <li><a href="../learn-act/learn.html">Learn & Act</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="dashboard-container page-content">
+        <div class="page-header">
+            <h1>📊 Hunger Awareness Dashboard</h1>
+            <p>Interactive statistics on hunger, donations, and food waste</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-number">828M</div>
+                <div class="stat-label">People Facing Hunger Globally</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🍽️</div>
+                <div class="stat-number">1.3M</div>
+                <div class="stat-label">Meals Served This Month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-number">45K</div>
+                <div class="stat-label">Food Donations Received</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🗑️</div>
+                <div class="stat-number">1.3B</div>
+                <div class="stat-label">Tons of Food Wasted Annually</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h2>📈 Monthly Donations Trend</h2>
+                <div class="chart-container">
+                    <canvas id="donationsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>🥗 Food Type Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="foodTypeChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>🗺️ Donations by Region</h2>
+                <div class="chart-container">
+                    <canvas id="regionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>📉 Food Waste Reduction</h2>
+                <div class="chart-container">
+                    <canvas id="wasteChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shared JS -->
+    <script src="../../assets/js/main.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="dashboard.js"></script>
+</body>
+</html>
+

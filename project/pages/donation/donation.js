@@ -1,6 +1,6 @@
 // Donation Page JavaScript
 
-let donations = [
+let donations = JSON.parse(localStorage.getItem('donations')) || [
     {
         id: 1,
         item: "Fresh Vegetables Bundle",
@@ -80,24 +80,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const newDonation = {
             id: donations.length + 1,
-            item: document.getElementById('foodItem').value,
+            item: document.getElementById('food-type').value,
             quantity: document.getElementById('quantity').value,
-            type: document.getElementById('foodType').value,
-            expiry: document.getElementById('expiryDate').value,
-            location: document.getElementById('location').value,
-            contact: document.getElementById('contact').value,
-            notes: document.getElementById('notes').value,
+            type: 'other', // Default type since form doesn't have type selector
+            expiry: document.getElementById('best-before').value,
+            location: document.getElementById('pickup-location').value,
+            contact: 'N/A',
+            notes: document.getElementById('details').value,
             status: 'available'
         };
 
         donations.unshift(newDonation);
+        localStorage.setItem('donations', JSON.stringify(donations));
         renderDonations();
         document.getElementById('donationForm').reset();
         alert('Thank you! Your donation has been listed successfully.');
     });
 
-    document.getElementById('searchInput').addEventListener('input', renderDonations);
-    document.getElementById('typeFilter').addEventListener('change', renderDonations);
+    // Note: Search and filter functionality would need to be added if needed
+    // For now, just render initial donations
 
     renderDonations();
 });

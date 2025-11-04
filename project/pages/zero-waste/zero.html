@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Waste Tracker | NourishNet</title>
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="zero.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <img src="../../assets/images/Logo.png" alt="NourishNet Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../donation/donation.html">Donate Food</a></li>
+                    <li><a href="../community-kitchen/community.html">Community Kitchens</a></li>
+                    <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+                    <li><a href="../farm-to-table/farm.html">Farm to Table</a></li>
+                    <li><a href="zero.html">Zero Waste</a></li>
+                    <li><a href="../learn-act/learn.html">Learn & Act</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="zero-waste-container page-content">
+        <div class="page-header">
+            <h1>⏰ Zero Waste Tracker</h1>
+            <p>Track your groceries and reduce food waste with smart expiry alerts</p>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>➕ Add New Item</h2>
+                <form id="itemForm">
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" id="itemName" placeholder="e.g., Milk, Bread, Tomatoes" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Purchase Date</label>
+                        <input type="date" id="purchaseDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="date" id="expiryDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="category" required>
+                            <option value="">Select category</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="produce">Produce</option>
+                            <option value="meat">Meat & Seafood</option>
+                            <option value="bakery">Bakery</option>
+                            <option value="pantry">Pantry Items</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-button">Add Item</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>📋 Your Grocery Items</h2>
+                <div class="stats-summary">
+                    <div class="stat-box">
+                        <div class="stat-number" id="totalItems">0</div>
+                        <div class="stat-label">Total Items</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="expiringCount">0</div>
+                        <div class="stat-label">Expiring Soon</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="expiredCount">0</div>
+                        <div class="stat-label">Expired</div>
+                    </div>
+                </div>
+                <div class="item-list" id="itemList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shared JS -->
+    <script src="../../assets/js/main.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="zero.js"></script>
+</body>
+</html>
+
